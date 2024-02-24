@@ -15,7 +15,9 @@ app.use(bodyParser.json({ extended: false}));
 
 app.use(SignUpRouter);
 
-sequelize.sync()
+sequelize
+.sync()
+// .sync({force:true})
 .then(()=>{
     app.listen(3000);
 })

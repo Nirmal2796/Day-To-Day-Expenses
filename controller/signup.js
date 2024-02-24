@@ -6,14 +6,22 @@ exports.postUser=(req,res,next)=>{
     email=req.body.email;
     password=req.body.password;
 
-    User.create({
-        uname:uname,
-        email:email,
-        password:password
+   User.findOne({where:{email:email}})
+   .then(user=>{
+        if(user){
+            res.status(403).json('User Already Exists');
+        }
+        else{
+            return User.create({
+                uname:uname,
+                email:email,
+                password:password
+            });
+        }
+   })
+   .then((user)=>{
+    res.status(200).json(user);
     })
-    .then((user)=>{
-        res.status(200).json(user);
-    })
-    .catch(err=> console.log(err));
+   .catch(err=> console.log(err));
 
 }
