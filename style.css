@@ -24,3 +24,7 @@ form label{
 .btn :hover{
     background-color: rgb(160, 131, 93);
 }
+
+#error{
+    color: red;
+}

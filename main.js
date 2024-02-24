@@ -4,6 +4,7 @@ const uname=document.getElementById('name');
 const email=document.getElementById('email');
 const password=document.getElementById('password');
 const msg=document.getElementById('msg');
+const error=document.getElementById('error');
 
 form.addEventListener('submit',addUser);
 
@@ -23,7 +24,9 @@ async function addUser(e){
 
     }
     else{
-
+       if(error.firstChild){        
+            error.removeChild(error.firstChild);
+       }
         try{
 
             const User={
@@ -36,7 +39,11 @@ async function addUser(e){
             form.reset();
         }
         catch(err){
-            console.log(err);
+
+            error.innerHTML = `Error: ${err.message} , ${err.response.data}`;
+            console.log(err.message);
+            form.reset();
+               
         }
 
     }
