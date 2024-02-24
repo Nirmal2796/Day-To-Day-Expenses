@@ -21,8 +21,9 @@ form label{
     border-color: rgb(189, 160, 123);
 }
 
-.btn :hover{
-    background-color: rgb(160, 131, 93);
+.btn-primary:hover{
+    background-color: rgb(107, 80, 45);
+    border-color: rgb(107, 80, 45);;
 }
 
 #error{
