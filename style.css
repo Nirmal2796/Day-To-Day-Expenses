@@ -1,0 +1,26 @@
+header{
+    display: flex;
+    justify-content: center;
+    background-color:rgb(189, 160, 123);
+}
+
+
+.card{
+    margin-top: 10px;
+    margin-left: 350px;
+    justify-content: center;
+    background-color: antiquewhite;
+}
+
+form label{
+    font-weight: bold;
+}
+
+.btn{
+    background-color: rgb(189, 160, 123);
+    border-color: rgb(189, 160, 123);
+}
+
+.btn :hover{
+    background-color: rgb(160, 131, 93);
+}
