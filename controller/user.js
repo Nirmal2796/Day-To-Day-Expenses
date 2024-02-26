@@ -1,5 +1,7 @@
 const User=require('../model/user');
 
+const bcrypt=require('bcrypt');
+
 exports.postSignUpUser=(req,res,next)=>{
     
     uname=req.body.uname;
@@ -13,17 +15,22 @@ exports.postSignUpUser=(req,res,next)=>{
             res.status(403).json('User Already Exists');
         }
         else{
-            return User.create({
-                uname:uname,
-                email:email,
-                password:password
-            });
+
+            bcrypt.hash(password,10,async(err,hash)=>{
+                return User.create({
+                    uname:uname,
+                    email:email,
+                    password:hash
+                });
+            })   
         }
    })
    .then((user)=>{
-    res.status(200).json(user);
+        res.status(200).json({success:true, message:'New User created Successfully'});
     })
-   .catch(err=> console.log(err));
+   .catch(err=>{
+        res.status(500).json({message:err, success:false});
+   });
 
 }
 
@@ -44,13 +51,22 @@ exports.postLoginUser=(req,res,next)=>{
         }
    })
    .then((user)=>{
-        if(user.password != password){
-            res.status(401).json('User not authorized');
+
+    bcrypt.compare(password,user.password, (err,result)=>{
+        if(err){
+            res.status(500).json({success:false,message:'Something Went Wrong'})
+        }
+        if(result){
+            res.status(200).json({success:true, message:'User logged in Successfully'});
         }
         else{
-            res.status(200).json(user);
+            res.status(401).json('User not authorized');
         }
     })
-   .catch(err=> console.log(err));
+
+    })
+    .catch(err=>{
+        res.status(500).json({message:err, success:false});
+   });
 
 }
