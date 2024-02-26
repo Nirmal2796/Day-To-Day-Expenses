@@ -7,13 +7,13 @@ const bodyParser=require('body-parser');
 
 const sequelize=require('./util/database');
 
-const SignUpRouter=require('./routes/signup');
+const UserRouter=require('./routes/user');
 
 
 app.use(cors());
 app.use(bodyParser.json({ extended: false}));
 
-app.use(SignUpRouter);
+app.use(UserRouter);
 
 sequelize
 .sync()
