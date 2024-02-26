@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+        integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="style.css">
+
+    <title>SIGN UP</title>
+</head>
+<body>
+
+    <div>
+        <header>
+            <h1>
+                LOG IN
+            </h1>
+        </header>
+    </div>
+
+    <div class="card card-body col-6">
+        <div id="msg"></div>
+        <div>
+            <form>
+                <div class="form-group row">
+
+                <label for="email">Enter Email</label>
+                <input type="email" id="email" class="form-control">
+                </div>
+
+                <div class="form-group row">
+                <label for="password">Enter Password</label>
+                <input type="password" id="password" class="form-control">
+                </div>
+
+                <div class="form-group row">
+                    <button type="submit" class="btn btn-primary">LOGIN</button>
+                </div>
+
+                <div class="form-group row float-right">
+                    <label for="email" class="col-form-label">New User</label>
+                    <a href="../Signup/signup.html">
+                        <button type="button" class="btn btn-primary">SIGN UP</button>
+                    </a>
+                </div>
+
+            </form>
+        </div>
+
+        <div id="error"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
+    <script src="main.js"></script>
+
+</body>
+</html>
