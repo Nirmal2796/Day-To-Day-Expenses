@@ -8,12 +8,14 @@ const bodyParser=require('body-parser');
 const sequelize=require('./util/database');
 
 const UserRouter=require('./routes/user');
+const ExpenseRouter=require('./routes/expense');
 
 
 app.use(cors());
 app.use(bodyParser.json({ extended: false}));
 
 app.use(UserRouter);
+app.use(ExpenseRouter);
 
 sequelize
 .sync()

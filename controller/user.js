@@ -43,18 +43,18 @@ exports.postLoginUser=(req,res,next)=>{
    User.findOne({where:{email:email}})
    .then(user=>{
         // console.log(user);
-        if(!user){
-            res.status(404).json('User Not Found');
+        if(user){
+            return user;
         }
         else{
-            return user;
+            res.status(404).json('User Not Found');
         }
    })
    .then((user)=>{
 
     bcrypt.compare(password,user.password, (err,result)=>{
         if(err){
-            res.status(500).json({success:false,message:'Something Went Wrong'})
+            res.status(500).json({success:false,message:'Something Went Wrong'});
         }
         if(result){
             res.status(200).json({success:true, message:'User logged in Successfully'});
@@ -66,7 +66,8 @@ exports.postLoginUser=(req,res,next)=>{
 
     })
     .catch(err=>{
-        res.status(500).json({message:err, success:false});
+        // res.status(500).json({message:err, success:false});
+        console.log(err);
    });
 
 }
