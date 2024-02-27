@@ -1,0 +1,32 @@
+header{
+    display: flex;
+    justify-content: center;
+    background-color:rgb(189, 160, 123);
+}
+
+
+.card{
+    margin-top: 10px;
+    margin-left: 350px;
+    justify-content: center;
+    background-color: antiquewhite;
+}
+
+form label{
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.btn{
+    background-color: rgb(189, 160, 123);
+    border-color: rgb(189, 160, 123);
+}
+
+.btn-primary:hover{
+    background-color: rgb(107, 80, 45);
+    border-color: rgb(107, 80, 45);;
+}
+
+#error{
+    color: red;
+}
