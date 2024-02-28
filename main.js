@@ -15,7 +15,8 @@ document.addEventListener('DOMContentLoaded', DomLoad);
 
 async function DomLoad() {
     try{
-        const res = await axios.get("http://localhost:3000/get-expenses")
+        const token=localStorage.getItem('token');
+        const res = await axios.get("http://localhost:3000/get-expenses",{headers:{"Autherization":token}});
         
         console.log(res.data);
 
@@ -41,13 +42,14 @@ async function onSubmit(e) {
         }, 2000);
     } 
     else {
+        const token=localStorage.getItem('token');
             try{
                 expense={
                     amount:amount.value,
                     description:desc.value,
                     category:category.value
                 };
-                let response= await axios.post("http://localhost:3000/add-expense/",expense);
+                let response= await axios.post("http://localhost:3000/add-expense/",expense,{headers:{"Autherization":token}});
                 console.log(response.data.id);
                 showOnScreen(response.data);
             }
@@ -78,8 +80,8 @@ function showOnScreen(obj){
 
 async function removeExpense(id) {
     try{
-
-        await axios.delete(`http://localhost:3000/delete-expense/${id}`);
+        const token=localStorage.getItem('token');
+        await axios.delete(`http://localhost:3000/delete-expense/${id}`,{headers:{"Autherization":token}});
         ul.removeChild(document.getElementById(id));
                                  
     }
