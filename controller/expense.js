@@ -6,7 +6,9 @@ exports.postExpense=(req,res,next)=>{
     description=req.body.description;
     category=req.body.category;
 
-    Expense.create({
+   
+
+    req.user.createExpense({
         amount:amount,
         description:description,
         category:category
@@ -23,7 +25,7 @@ exports.postExpense=(req,res,next)=>{
 
 exports.getExpenses=(req,res,next)=>{
 
-    Expense.findAll()
+    req.user.getExpenses()
     .then(expenses=>{
         res.status(200).json(expenses);
     })
@@ -37,12 +39,19 @@ exports.deleteExpense=(req,res,next)=>{
 
     const id=req.params.id;
 
-    Expense.findByPk(id)
+    Expense.destroy({where:{id:id, userId:req.user.id}})
     .then(expense=>{
-        expense.destroy();
         res.status(200).json({success:true,message:'Deleted Successfully'});
     })
     .catch(err=> console.log(err));
+
+
+    // Expense.findByPk(id)
+    // .then(expense=>{
+    //     expense.destroy();
+    //     res.status(200).json({success:true,message:'Deleted Successfully'});
+    // })
+    // .catch(err=> console.log(err));
    
 
 

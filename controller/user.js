@@ -2,6 +2,8 @@ const User=require('../model/user');
 
 const bcrypt=require('bcrypt');
 
+const jwt=require('jsonwebtoken');
+
 exports.postSignUpUser=(req,res,next)=>{
     
     uname=req.body.uname;
@@ -31,8 +33,13 @@ exports.postSignUpUser=(req,res,next)=>{
    .catch(err=>{
         res.status(500).json({message:err, success:false});
    });
-
 }
+
+function generateAccessToken(id){ //we will call this funciton when user has successfully logged in.
+    //jst.sign({what you want to encrypt} ,  secret key); never share your secret key and dont even save it to git
+    return jwt.sign({userId: id}, 'secretkey');
+}
+
 
 
 exports.postLoginUser=(req,res,next)=>{
@@ -57,7 +64,7 @@ exports.postLoginUser=(req,res,next)=>{
             res.status(500).json({success:false,message:'Something Went Wrong'});
         }
         if(result){
-            res.status(200).json({success:true, message:'User logged in Successfully'});
+            res.status(200).json({success:true, message:'User logged in Successfully' , token:generateAccessToken(user.id)});
         }
         else{
             res.status(401).json('User not authorized');
