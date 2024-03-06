@@ -40,7 +40,7 @@ async function addUser(e){
         }
         catch(err){
 
-            error.innerHTML = `Error: ${err.message} , ${err.response.data}`;
+            error.innerHTML = `Error: ${err.message}`;
             console.log(err.message);
             form.reset();
                
