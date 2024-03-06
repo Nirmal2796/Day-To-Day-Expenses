@@ -5,7 +5,7 @@ const rzp_button=document.getElementById('rzp-button');
 
 const form = document.querySelector('form');
 const ul = document.getElementById('expense-list');
-const list_div = document.getElementById('Elist');
+const ElistDiv=document.getElementById('Elist');
 
 
 
@@ -22,8 +22,8 @@ async function DomLoad() {
         
         console.log(res.data);
 
-        if(res.data.length>0){
-            list_div.hidden=false;
+        if(res.data){
+            ElistDiv.hidden=false;
             for (let i in res.data) {
                 showOnScreen(res.data[i]);
            }
@@ -55,9 +55,9 @@ async function onSubmit(e) {
                     category:category.value
                 };
                 let response= await axios.post("http://localhost:3000/add-expense/",expense,{headers:{"Authorization":token}});
-                // console.log(response.data.id);
-                if(list_div.hidden){
-                    list_div.hidden=false;
+                console.log(response.data.id);
+                if(ElistDiv.hidden){
+                    ElistDiv.hidden=false;
                 }
                 showOnScreen(response.data);
             }
@@ -115,23 +115,31 @@ async function razorpayEvent(e){
         //handler function will handle the success payment.
         "handler": async function(response){
             await axios.post("http://localhost:3000/purchase/updatetransactionstatus",{
-            order_id:options.order_id,
-            payment_id:response.razorpay_payment_id
+                order_id:options.order_id,
+                payment_id:response.razorpay_payment_id,
+                status:'Successful'
             },
             {headers:{"Authorization":token}});
 
-            rzp_button.hidden=true;
-            document.querySelector('h6').hidden=false;
             alert("You are a premium user now");
         }
     }
 
+    //To open the razorpay window
     const rzp1=new Razorpay(options);
     rzp1.open();
     e.preventDefault();
 
-    rzp1.on('payment failed', function(response){
+    //To handle payment failed.
+    rzp1.on('payment.failed', async function(response){
         console.log(response);
+        await axios.post("http://localhost:3000/purchase/updatetransactionstatus",{
+                order_id:options.order_id,
+                payment_id:response.razorpay_payment_id,
+                status:'Failed'
+            },
+            {headers:{"Authorization":token}});
+            
         alert('something went wrong');
     })
 
