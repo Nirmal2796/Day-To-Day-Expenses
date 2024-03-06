@@ -12,11 +12,14 @@
 </head>
 <body>
 
-    <div>
+    <div class="page-header">
         <header>
             <h1>
-                Add Expenses
+                Day-To-Day Expense
             </h1>
+            <button id="rzp-button" class="btn btn-primary">Buy MemberShip</button>
+            <h6 hidden>You are a Premium User</h6>
+            <script src="https://checkout.razorpay.com/v1/checkout.js"></script>  
         </header>
     </div>
 
@@ -55,7 +58,9 @@
         <div id="error"></div>
     </div>
 
-    <div class="card card-body col-6">
+    
+
+    <div class="card card-body col-6" id="Elist" hidden>
         <ul id="expense-list" class="list-group">
 
         </ul>

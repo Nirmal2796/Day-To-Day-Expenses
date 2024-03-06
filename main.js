@@ -1,14 +1,16 @@
 const amount = document.getElementById('amount');
 const desc = document.getElementById('description');
 const category = document.getElementById('category');
-// const eid=document.getElementById('id');
+const rzp_button=document.getElementById('rzp-button');
 
 const form = document.querySelector('form');
 const ul = document.getElementById('expense-list');
+const list_div = document.getElementById('Elist');
 
 
 
 form.addEventListener('submit', onSubmit);
+rzp_button.addEventListener('click',razorpayEvent);
 
 
 document.addEventListener('DOMContentLoaded', DomLoad);
@@ -16,13 +18,16 @@ document.addEventListener('DOMContentLoaded', DomLoad);
 async function DomLoad() {
     try{
         const token=localStorage.getItem('token');
-        const res = await axios.get("http://localhost:3000/get-expenses",{headers:{"Autherization":token}});
+        const res = await axios.get("http://localhost:3000/get-expenses",{headers:{"Authorization":token}});
         
         console.log(res.data);
 
+        if(res.data.length>0){
+            list_div.hidden=false;
             for (let i in res.data) {
                 showOnScreen(res.data[i]);
            }
+        }
             
         }
         catch(err){
@@ -49,8 +54,11 @@ async function onSubmit(e) {
                     description:desc.value,
                     category:category.value
                 };
-                let response= await axios.post("http://localhost:3000/add-expense/",expense,{headers:{"Autherization":token}});
-                console.log(response.data.id);
+                let response= await axios.post("http://localhost:3000/add-expense/",expense,{headers:{"Authorization":token}});
+                // console.log(response.data.id);
+                if(list_div.hidden){
+                    list_div.hidden=false;
+                }
                 showOnScreen(response.data);
             }
             catch(err){
@@ -81,12 +89,51 @@ function showOnScreen(obj){
 async function removeExpense(id) {
     try{
         const token=localStorage.getItem('token');
-        await axios.delete(`http://localhost:3000/delete-expense/${id}`,{headers:{"Autherization":token}});
+        await axios.delete(`http://localhost:3000/delete-expense/${id}`,{headers:{"Authorization":token}});
         ul.removeChild(document.getElementById(id));
                                  
     }
     catch(err){
         console.log(err);
     }
+
+}
+
+
+async function razorpayEvent(e){
+
+    const token=localStorage.getItem('token');
+
+    const response =await axios.get("http://localhost:3000/purchase/premiummembership",{headers:{"Authorization":token}});
+
+    console.log(response);
+
+    var options={
+        
+        "key": response.data.key_id, //key id generated from razorpay dashboard.
+        "order_id": response.data.order.id, //for one time payment 
+        //handler function will handle the success payment.
+        "handler": async function(response){
+            await axios.post("http://localhost:3000/purchase/updatetransactionstatus",{
+            order_id:options.order_id,
+            payment_id:response.razorpay_payment_id
+            },
+            {headers:{"Authorization":token}});
+
+            rzp_button.hidden=true;
+            document.querySelector('h6').hidden=false;
+            alert("You are a premium user now");
+        }
+    }
+
+    const rzp1=new Razorpay(options);
+    rzp1.open();
+    e.preventDefault();
+
+    rzp1.on('payment failed', function(response){
+        console.log(response);
+        alert('something went wrong');
+    })
+
 
 }

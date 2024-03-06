@@ -1,9 +1,22 @@
 header{
     display: flex;
     justify-content: center;
-    background-color:rgb(189, 160, 123);
+    background-color:rgb(185, 159, 125);
+    color:  rgb(95, 71, 37);
+    font-weight: bold;
 }
 
+header .btn{
+    margin-left: auto;
+    color:  rgb(95, 71, 37);
+    font-weight: bold;
+}
+
+h6{
+    margin-left: auto;
+    color:  rgb(95, 71, 37);
+    font-weight: bold;
+}
 
 .card{
     margin-top: 10px;
@@ -15,11 +28,15 @@ header{
 form label{
     font-weight: bold;
     margin-right: 10px;
+    color:  rgb(95, 71, 37);
+    font-weight: bold;
 }
 
 .btn{
     background-color: rgb(189, 160, 123);
     border-color: rgb(189, 160, 123);
+    color:  rgb(95, 71, 37);
+    font-weight: bold;
 }
 
 .btn-primary:hover{
