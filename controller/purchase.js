@@ -40,16 +40,16 @@ exports.purchasePremium=(req,res,next)=>{
 
 exports.updatetransactionstatus=(req,res,next)=>{
 
-    const {order_id, payment_id}=req.body;
+    const {order_id, payment_id,status}=req.body;
 
     Order.findOne({where:{orderId:order_id}})
     .then((order)=>{
-        const p1=order.update({paymentId:payment_id, status:'SUCCESSFUL'})
+        const p1=order.update({paymentId:payment_id, status:status})
         const p2=req.user.update({ispremiumuser:true});
 
         Promise.all([p1,p2])
         .then(()=>{
-            res.status(202).json({success:true,message:'Transaction Successful'});
+            res.status(202).json({message:`Transaction ${status}`});
         })
     })
     .catch(err=>console.log(err))
