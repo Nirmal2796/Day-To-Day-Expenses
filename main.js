@@ -36,6 +36,10 @@ async function logInUser(e){
 
             alert('User Logged In Successfully');
 
+            localStorage.setItem('token',result.data.token);
+
+            window.location.href= '../ExpenseTracker/expense.html';
+
             form.reset();
         }
         catch(err){
