@@ -44,8 +44,14 @@ exports.updatetransactionstatus=(req,res,next)=>{
 
     Order.findOne({where:{orderId:order_id}})
     .then((order)=>{
-        const p1=order.update({paymentId:payment_id, status:status})
-        const p2=req.user.update({ispremiumuser:true});
+        const p1=order.update({paymentId:payment_id, status:status});
+        let p2;
+        if(status=='Successful'){
+            p2=req.user.update({ispremiumuser:true});
+        }
+        else{
+            p2=req.user.update({ispremiumuser:false});
+        }
 
         Promise.all([p1,p2])
         .then(()=>{

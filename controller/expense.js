@@ -27,7 +27,7 @@ exports.getExpenses=(req,res,next)=>{
 
     req.user.getExpenses()
     .then(expenses=>{
-        res.status(200).json(expenses);
+        res.status(200).json({expenses, ispremiumuser: req.user.ispremiumuser});
     })
     .catch(err=>{
         console.log(err);
