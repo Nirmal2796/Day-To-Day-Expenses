@@ -22,7 +22,7 @@ async function DomLoad() {
         
         console.log(res.data);
 
-        if(res.data){
+        if(res.data.length > 0){
             ElistDiv.hidden=false;
             for (let i in res.data) {
                 showOnScreen(res.data[i]);
