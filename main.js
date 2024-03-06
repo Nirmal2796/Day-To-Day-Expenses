@@ -20,12 +20,21 @@ async function DomLoad() {
         const token=localStorage.getItem('token');
         const res = await axios.get("http://localhost:3000/get-expenses",{headers:{"Authorization":token}});
         
-        console.log(res.data);
+        console.log(res.data.expenses);
 
-        if(res.data.length > 0){
+        localStorage.setItem('ispremiumuser',res.data.ispremiumuser);
+
+        const ispremiumuser=localStorage.getItem('ispremiumuser');
+
+        if(ispremiumuser){
+            document.querySelector('h6').hidden=false;
+            rzp_button.hidden=true;
+        }
+
+        if(res.data.expenses.length > 0){
             ElistDiv.hidden=false;
-            for (let i in res.data) {
-                showOnScreen(res.data[i]);
+            for (let i in res.data.expenses) {
+                showOnScreen(res.data.expenses[i]);
            }
         }
             
