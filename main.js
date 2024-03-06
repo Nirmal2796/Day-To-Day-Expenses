@@ -26,7 +26,9 @@ async function DomLoad() {
 
         const ispremiumuser=localStorage.getItem('ispremiumuser');
 
-        if(ispremiumuser){
+        // console.log(ispremiumuser);
+
+        if(ispremiumuser!=null && ispremiumuser=='true'){
             document.querySelector('h6').hidden=false;
             rzp_button.hidden=true;
         }
@@ -64,7 +66,7 @@ async function onSubmit(e) {
                     category:category.value
                 };
                 let response= await axios.post("http://localhost:3000/add-expense/",expense,{headers:{"Authorization":token}});
-                console.log(response.data.id);
+                // console.log(response.data.id);
                 if(ElistDiv.hidden){
                     ElistDiv.hidden=false;
                 }
