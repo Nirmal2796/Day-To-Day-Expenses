@@ -36,39 +36,12 @@ exports.postExpense=(req,res,next)=>{
 
 
 exports.getExpenses=(req,res,next)=>{
-
+    
     req.user.getExpenses()
     .then(expenses=>{
-        
-        User.findOne({where:{email:email}})
-        .then(user=>{
-             // console.log(user);
-             if(user){
-                 return user;
-             }
-             else{
-                 res.status(404).json('User Not Found');
-             }
-        })
-        .then((user)=>{
-     
-         bcrypt.compare(password,user.password, (err,result)=>{
-             if(err){
-                 res.status(500).json({success:false,message:'Something Went Wrong'});
-             }
-             if(result){
-                res.status(200).json({expenses ,ispremiumuser: user.ispremiumuser ,token:generateAccessToken(user.id)});
-             }
-             else{
-                 res.status(401).json('User not authorized');
-             }
-         })
-     
-         })
-
-
-        
-    })
+        res.status(200).json({expenses ,ispremiumuser: req.user.ispremiumuser ,token:generateAccessToken(req.user.id)});
+    
+     })
     .catch(err=>{
         console.log(err);
     })
@@ -84,15 +57,5 @@ exports.deleteExpense=(req,res,next)=>{
         res.status(200).json({success:true,message:'Deleted Successfully'});
     })
     .catch(err=> console.log(err));
-
-
-    // Expense.findByPk(id)
-    // .then(expense=>{
-    //     expense.destroy();
-    //     res.status(200).json({success:true,message:'Deleted Successfully'});
-    // })
-    // .catch(err=> console.log(err));
-   
-
 
 }
