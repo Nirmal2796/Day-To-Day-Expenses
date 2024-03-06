@@ -121,7 +121,10 @@ async function razorpayEvent(e){
             },
             {headers:{"Authorization":token}});
 
+            
             alert("You are a premium user now");
+            document.querySelector('h6').hidden=false;
+            rzp_button.hidden=true;
         }
     }
 

@@ -16,6 +16,7 @@ h6{
     margin-left: auto;
     color:  rgb(95, 71, 37);
     font-weight: bold;
+    align-self: center;
 }
 
 .card{
