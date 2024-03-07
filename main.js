@@ -124,7 +124,7 @@ async function showLeaderBoard(){
 
     const result=await axios.get("http://localhost:3000/premium/showleaderboard",{headers:{"Authorization":token}})
 
-    // console.log(result.data);
+    console.log(result.data);
 
     LeaderBoardListDiv.hidden=false;
     
@@ -136,13 +136,13 @@ async function showLeaderBoard(){
 
         if(result.data.result[i].amount == null){
             child=`<li id=${result.data.result[i].id}> 
-                    ${result.data.result[i].user.uname} - 0 
+                    ${result.data.result[i].uname} - 0 
                     </li>`
         }
         else{
             // console.log(result.data.result[i].user);
             child=`<li id=${result.data.result[i].id}> 
-                ${result.data.result[i].user.uname} - ${result.data.result[i].amount}  
+                ${result.data.result[i].uname} - ${result.data.result[i].amount}  
                 </li>`
         }
 
