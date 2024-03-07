@@ -18,8 +18,10 @@
                 Day-To-Day Expense
             </h1>
             <button id="rzp-button" class="btn btn-primary">Buy MemberShip</button>
-            <h6 hidden>You are a Premium User</h6>
             <script src="https://checkout.razorpay.com/v1/checkout.js"></script>  
+
+            <h6 hidden>You are a Premium User</h6>
+            <button id="leaderboard-button" class="btn btn-primary" hidden>Show LeaderBoard</button>
         </header>
     </div>
 
@@ -62,6 +64,12 @@
 
     <div class="card card-body col-6" id="Elist" hidden>
         <ul id="expense-list" class="list-group">
+
+        </ul>
+    </div>
+
+    <div class="card card-body col-6" id="LeaderBoardList" hidden>
+        <ul id="leaderboard-list" class="list-group">
 
         </ul>
     </div>

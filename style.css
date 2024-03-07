@@ -7,16 +7,23 @@ header{
 }
 
 header .btn{
-    margin-left: auto;
+    
+    border-color:  rgb(95, 71, 37);
+    border-radius: 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 50px;
     color:  rgb(95, 71, 37);
     font-weight: bold;
 }
 
-h6{
+
+header h6{
     margin-left: auto;
     color:  rgb(95, 71, 37);
     font-weight: bold;
     align-self: center;
+    margin-top: 10px;
 }
 
 .card{
