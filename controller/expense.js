@@ -1,9 +1,5 @@
 const Expense=require('../model/expense');
 
-const User=require('../model/user');
-
-const bcrypt=require('bcrypt');
-
 const jwt=require('jsonwebtoken');
 
 function generateAccessToken(id){ //we will call this funciton when user has successfully logged in.

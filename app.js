@@ -15,6 +15,7 @@ const Order=require('./model/order');
 const UserRouter=require('./routes/user');
 const ExpenseRouter=require('./routes/expense');
 const PurchaseRouter=require('./routes/purchase');
+const PremiumRouter=require('./routes/premium');
 
 
 app.use(cors());
@@ -23,6 +24,7 @@ app.use(bodyParser.json({ extended: false}));
 app.use(UserRouter);
 app.use(ExpenseRouter);
 app.use('/purchase',PurchaseRouter);
+app.use('/premium',PremiumRouter);
 
 User.hasMany(Expense);
 Expense.belongsTo(User);
