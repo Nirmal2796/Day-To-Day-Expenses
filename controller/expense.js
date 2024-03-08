@@ -1,4 +1,6 @@
 const Expense=require('../model/expense');
+const Sequelize = require('sequelize').Sequelize;
+const sequelize = require('../util/database');
 
 const jwt=require('jsonwebtoken');
 
@@ -22,6 +24,14 @@ exports.postExpense=(req,res,next)=>{
         category:category
     })
     .then((expense)=>{
+        console.log(req.user.total_expense);
+
+        req.user.total_expense=req.user.total_expense + amount;
+            
+        req.user.increment('total_expense',{by:amount});
+        
+        // console.log(req.user);
+
         res.status(200).json(expense);
     })
     .catch(err=>{
