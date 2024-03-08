@@ -11,17 +11,15 @@
     <title>Expenses</title>
 </head>
 <body>
-
+    
     <div class="page-header">
         <header>
             <h1>
                 Day-To-Day Expense
             </h1>
-            <button id="rzp-button" class="btn btn-primary">Buy MemberShip</button>
-            <script src="https://checkout.razorpay.com/v1/checkout.js"></script>  
+            
 
-            <h6 hidden>You are a Premium User</h6>
-            <button id="leaderboard-button" class="btn btn-primary" hidden>Show LeaderBoard</button>
+            
         </header>
     </div>
 
@@ -53,6 +51,14 @@
 
                 <div class="form-group row">
                     <button type="submit" class="btn btn-primary">Add Expense</button>
+                </div>
+
+                <div class="form-group row" id="premiumfeatures">
+                    <button id="rzp-button" class="btn btn-primary">Buy MemberShip</button>
+                    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>  
+
+                    <h6 hidden>You are a Premium User</h6>
+                    <button id="leaderboard-button" class="btn btn-primary" hidden>Show LeaderBoard</button>
                 </div>
             </form>
         </div>

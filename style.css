@@ -6,17 +6,18 @@ header{
     font-weight: bold;
 }
 
-header .btn{
-    
+/* header .btn{
     border-color:  rgb(95, 71, 37);
     border-radius: 15px;
     margin-top: 5px;
     margin-bottom: 5px;
-    margin-left: 50px;
+    margin-left: auto;
     color:  rgb(95, 71, 37);
     font-weight: bold;
+} */
+#premiumfeatures{
+   float: right;
 }
-
 
 header h6{
     margin-left: auto;
@@ -31,6 +32,8 @@ header h6{
     margin-left: 350px;
     justify-content: center;
     background-color: antiquewhite;
+
+
 }
 
 form label{
@@ -54,4 +57,53 @@ form label{
 
 #error{
     color: red;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media screen and (max-width: 600px) {
+     
+    .page-header{
+        width: 100%;
+    }
+
+    h1{
+        font-size: large;
+        font-weight: bold;
+        padding-top: 10px;
+    }
+    
+    .card{
+        margin-left: 25%;
+        width: max-content;
+    }
+
+    #premiumfeatures{
+        float: none;
+    }
+
+    #premiumfeatures .btn{
+      font-size: small;
+    }
+}
+
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+
+    .card{
+        margin-left: 40%;
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px){
+    .card{
+        margin-left: 25%;
+    }
+}
+
+@media only screen and (orientation: landscape) {
+    .card{
+        margin-left: 25%;
+    }
 }
