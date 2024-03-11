@@ -52,33 +52,39 @@
                 <div class="form-group row">
                     <button type="submit" class="btn btn-primary">Add Expense</button>
                 </div>
-
-                <div class="form-group row" id="premiumfeatures">
-                    <button id="rzp-button" class="btn btn-primary">Buy MemberShip</button>
-                    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>  
-
-                    <h6 hidden>You are a Premium User</h6>
-                    <button id="leaderboard-button" class="btn btn-primary" hidden>Show LeaderBoard</button>
-                </div>
+    
             </form>
+            
+            <div class="form-group row" id="premiumfeatures">
+                <button id="rzp-button" class="btn btn-primary">Buy MemberShip</button>
+                <script src="https://checkout.razorpay.com/v1/checkout.js"></script>  
+
+                <h6 hidden>You are a Premium User</h6>
+                <button id="leaderboard-button" class="btn btn-primary" hidden>Show LeaderBoard</button>
+            </div>
         </div>
 
         <div id="error"></div>
     </div>
 
+    <div id="All_Lists">
+
+        <div class="card card-body col-6" id="Elist" hidden>
+            <h3>EXPENSES</h3>
+            <ul id="expense-list" class="list-group">
     
-
-    <div class="card card-body col-6" id="Elist" hidden>
-        <ul id="expense-list" class="list-group">
-
-        </ul>
+            </ul>
+        </div>
+    
+        <div class="card card-body col-6" id="LeaderBoardList" hidden>
+            <h3>LEADERBOARD</h3>
+            <ul id="leaderboard-list" class="list-group">
+                
+    
+            </ul>
+        </div>
     </div>
 
-    <div class="card card-body col-6" id="LeaderBoardList" hidden>
-        <ul id="leaderboard-list" class="list-group">
-
-        </ul>
-    </div>
 
 
 

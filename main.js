@@ -109,7 +109,7 @@ function showOnScreen(obj){
  
     const child=`<li id=${obj.id}> 
     ${obj.category} - ${obj.amount} - ${obj.description}
-    <button class='btn btn-danger btn-sm float-right mb-2' onClick=removeExpense(${obj.id})>Delete</button> 
+    <button class='btn btn-danger btn-sm  mb-2' onClick=removeExpense(${obj.id})>Delete</button> 
     </li>`
 
     Eul.innerHTML=Eul.innerHTML+child;
@@ -124,7 +124,7 @@ async function showLeaderBoard(){
 
     const result=await axios.get("http://localhost:3000/premium/showleaderboard",{headers:{"Authorization":token}})
 
-    console.log(result.data);
+    console.log(result.data.result);
 
     LeaderBoardListDiv.hidden=false;
     
@@ -134,7 +134,7 @@ async function showLeaderBoard(){
   
         let child;
 
-        if(result.data.result[i].amount == null){
+        if(result.data.result[i].total_expense == null){
             child=`<li id=${result.data.result[i].id}> 
                     ${result.data.result[i].uname} - 0 
                     </li>`
@@ -142,7 +142,7 @@ async function showLeaderBoard(){
         else{
             // console.log(result.data.result[i].user);
             child=`<li id=${result.data.result[i].id}> 
-                ${result.data.result[i].uname} - ${result.data.result[i].amount}  
+                ${result.data.result[i].uname} - ${result.data.result[i].total_expense}  
                 </li>`
         }
 
@@ -182,6 +182,7 @@ async function razorpayEvent(e){
             alert("You are a premium user now");
             document.querySelector('h6').hidden=false;
             rzp_button.hidden=true;
+            leaderboard_button.hidden=false;
         }
     }
 
@@ -197,8 +198,8 @@ async function razorpayEvent(e){
                 order_id:options.order_id,
                 payment_id:response.razorpay_payment_id,
                 status:'Failed'
-            },
-            {headers:{"Authorization":token}});
+        },
+        {headers:{"Authorization":token}});
             
         alert('something went wrong');
     })

@@ -5,6 +5,19 @@ header{
     color:  rgb(95, 71, 37);
     font-weight: bold;
 }
+h3{
+    align-self: center;
+    color:  rgb(95, 71, 37);
+    font-weight: bold;
+}
+#msg, #error{
+    color: red;
+}
+
+
+#All_Lists{
+    display: flex;
+}
 
 /* header .btn{
     border-color:  rgb(95, 71, 37);
@@ -19,12 +32,13 @@ header{
    float: right;
 }
 
-header h6{
-    margin-left: auto;
+
+#premiumfeatures h6{
+    margin: 10px;
     color:  rgb(95, 71, 37);
     font-weight: bold;
     align-self: center;
-    margin-top: 10px;
+    /* margin-top: 10px; */
 }
 
 .card{
@@ -34,6 +48,18 @@ header h6{
     background-color: antiquewhite;
 
 
+}
+
+.list-group .btn{
+    float: right;
+}
+
+li{
+    border-bottom: 1px dotted rgb(95, 71, 37);
+    margin-top: 10px;
+    list-style-type:  decimal;
+    color:  rgb(95, 71, 37);
+    font-weight: bold;
 }
 
 form label{
@@ -81,8 +107,24 @@ form label{
         float: none;
     }
 
-    #premiumfeatures .btn{
-      font-size: small;
+    #premiumfeatures .btn,h6{
+      font-size: smaller;
+    }
+
+    .list-group .btn{
+        float: inline-end;
+    }
+
+    #LeaderBoardList{
+        width: auto;
+    }
+
+    #All_Lists{
+        display: inline;
+    }
+
+    h3{
+        font-size: medium;
     }
 }
 
@@ -100,10 +142,16 @@ form label{
     .card{
         margin-left: 25%;
     }
+    #Elist{
+        margin-left: 0px;
+    }
 }
 
 @media only screen and (orientation: landscape) {
     .card{
         margin-left: 25%;
     }
+    /* #Elist{
+        margin-left: 0px;
+    } */
 }
