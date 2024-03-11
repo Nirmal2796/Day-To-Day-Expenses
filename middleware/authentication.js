@@ -2,7 +2,7 @@ const jwt=require('jsonwebtoken');
 
 const User=require('../model/user');
 
-exports.authenticate=(req,res,next)=>{
+exports.authenticate=async (req,res,next)=>{
 
     try{
         const token=req.header('Authorization');
@@ -10,12 +10,12 @@ exports.authenticate=(req,res,next)=>{
 
         const user=jwt.verify(token,'secretkey');
 
-        User.findByPk(user.userId)
-        .then(user=>{
-            console.log(user);
-            req.user=user;
-            next();
-        })
+        const user_2 = await User.findByPk(user.userId)
+       
+        console.log(user_2);
+        req.user=user_2;
+        next();
+       
         
     }
     catch(err){
