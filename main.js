@@ -22,9 +22,9 @@ async function logInUser(e){
 
     }
     else{
-       if(error.firstChild){        
-            error.removeChild(error.firstChild);
-       }
+    //    if(error.firstChild){        
+    //         error.removeChild(error.firstChild);
+    //    }
         try{
 
             const User={
@@ -45,6 +45,11 @@ async function logInUser(e){
         catch(err){
 
             error.innerHTML = `Error: ${err.message} , ${err.response.data}`;
+
+            setTimeout(()=>{
+                error.removeChild(error.firstChild);
+            },2000);
+
             console.log(err.message);
             form.reset();
                
@@ -53,3 +58,5 @@ async function logInUser(e){
     }
 
 }
+
+
