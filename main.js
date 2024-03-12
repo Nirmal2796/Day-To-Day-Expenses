@@ -29,6 +29,7 @@ async function addUser(e){
        }
         try{
 
+            
             const User={
                 uname:uname.value,
                 email:email.value,
