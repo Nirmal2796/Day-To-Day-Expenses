@@ -11,12 +11,13 @@ const sequelize=require('./util/database');
 const User=require('./model/user');
 const Expense=require('./model/expense');
 const Order=require('./model/order');
+const ForgotPasswordRequests=require('./model/forgotPasswordRequests');
 
 const UserRouter=require('./routes/user');
 const ExpenseRouter=require('./routes/expense');
 const PurchaseRouter=require('./routes/purchase');
 const PremiumRouter=require('./routes/premium');
-const ForgotPasswordRouter=require('./routes/forgotPassword');
+const PasswordRouter=require('./routes/password');
 
 
 app.use(cors());
@@ -26,13 +27,16 @@ app.use(UserRouter);
 app.use(ExpenseRouter);
 app.use('/purchase',PurchaseRouter);
 app.use('/premium',PremiumRouter);
-app.use(ForgotPasswordRouter);
+app.use(PasswordRouter);
 
 User.hasMany(Expense);
 Expense.belongsTo(User);
 
 User.hasMany(Order);
 Order.belongsTo(User);
+
+User.hasMany(ForgotPasswordRequests);
+ForgotPasswordRequests.belongsTo(User);
 
 sequelize
 .sync()

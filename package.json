@@ -22,7 +22,8 @@
     "jsonwebtoken": "^9.0.2",
     "mysql2": "^3.9.1",
     "razorpay": "^2.9.2",
-    "sequelize": "^6.37.1"
+    "sequelize": "^6.37.1",
+    "uuid": "^9.0.1"
   },
   "keywords": [],
   "description": ""

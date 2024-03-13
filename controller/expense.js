@@ -1,6 +1,6 @@
 const Expense=require('../model/expense');
-const User = require('../model/user');
-const Sequelize = require('sequelize').Sequelize;
+// const User = require('../model/user');
+// const Sequelize = require('sequelize').Sequelize;
 const sequelize = require('../util/database');
 
 const jwt=require('jsonwebtoken');

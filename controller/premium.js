@@ -11,20 +11,11 @@ exports.showLeaderBoard=async(req,res,next)=>{
         
         const leaderBoard= await User.findAll({
                 attributes:['id','uname','total_expense'],//select
-                group:['user.id'],
-                order:[[sequelize.col('total_expense'),'DESC']]
+                order:[['total_expense','DESC']]
             });
 
 
-        // const result = await User.findAll({
-        //     attributes:['id','uname',[sequelize.fn('sum',sequelize.col('amount')),'amount']],//select 
-        //     include:[{
-        //         model:Expense,
-        //         attributes:[] //must mention
-        //     }],
-        //     group:['user.id'],
-        //     order:[[sequelize.col('amount'),'DESC']]
-        // })
+        
         
         //right join
         // Expense.findAll({attributes:[[sequelize.fn('sum',sequelize.col('amount')),'amount']],
