@@ -1,0 +1,63 @@
+
+
+header{
+    display: flex;
+    justify-content: center;
+    background-color:rgb(185, 159, 125);
+    color:  rgb(95, 71, 37);
+    font-weight: bold;
+}
+
+/* .col-10{
+    margin-top: 10px;
+    margin-left: 120px;
+    justify-content: center;
+    background-color: antiquewhite;
+} */
+
+.nav-item{
+    margin-left: 180px;
+    margin-right: 200px;
+    font-weight: bold;
+}
+
+#download{
+    position: absolute;
+    bottom: 20px;
+    right: 50px;
+}
+
+.btn{
+    background-color: rgb(189, 160, 123);
+    border-color: rgb(189, 160, 123);
+    color:  rgb(95, 71, 37);
+    font-weight: bold;
+}
+
+.btn-primary:hover{
+    background-color: rgb(107, 80, 45);
+    border-color: rgb(107, 80, 45);;
+}
+
+.table{
+    margin-top: 10px;
+    justify-self: center;
+    margin-left: 5%;
+    width: 90%;
+}
+
+
+
+@media screen and (max-width: 600px) {
+     
+    /* .page-header{
+        width: 100%;
+    } */
+
+    /* .card{
+        margin-left: 25%;
+        width: max-content;
+    } */
+
+} 
+
