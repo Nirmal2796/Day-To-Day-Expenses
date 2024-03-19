@@ -60,9 +60,32 @@ try{
 exports.getExpenses=async (req,res,next)=>{
    try{
 
-       const expenses= await req.user.getExpenses()
+        const page=req.query.page;
+        const expenses_per_page=1;
+
+        console.log(page);
+
+        const total=await Expense.count({where:{userId:req.user.id}});
+
+        console.log(total);
+
+        const expenses= await req.user.getExpenses({
+            offset:(Number(page)-1)*expenses_per_page,
+            limit:expenses_per_page
+        });
+
+        // console.log(expenses);
+
+       const expense_Data={
+        expense:expenses,
+        currentPage:Number(page),
+        hasnextPage: expenses_per_page * Number(page) < total,
+        nextPage:Number(page)+1,
+        hasPreviousPage: Number(page)>1,
+        previouePage: Number(page) -1
+       }
       
-        res.status(200).json({expenses ,ispremiumuser: req.user.ispremiumuser ,token:JwtServices.generateAccessToken(req.user.id)});
+        res.status(200).json({expense_Data ,ispremiumuser: req.user.ispremiumuser ,token:JwtServices.generateAccessToken(req.user.id)});
        
       
    } 
