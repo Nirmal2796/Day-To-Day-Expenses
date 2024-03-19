@@ -54,9 +54,9 @@ form label{
 }
 
 .btn{
-    background-color: rgb(160, 207, 224);
-    border-color: rgb(160, 207, 224);
-    color:  rgb(19,35,46);
+    background-color: rgb(19,35,46);
+    border-color: rgb(19,35,46);
+    color:  rgb(160, 207, 224);
     font-weight: bold;
 }
 

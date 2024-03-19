@@ -12,6 +12,7 @@ const LeaderBoardListDiv=document.getElementById('LeaderBoardList');
 const leaderboard_list = document.getElementById('leaderboard-list');
 const DownloadListDiv=document.getElementById('DownloadList');
 const DownloadList = document.getElementById('download-list');
+const PaginaitonList=document.getElementById('pagination');
 
 const DownloadH5=document.getElementById('nodownload');
 const ExpensesH5=document.getElementById('noexpenses');
@@ -23,14 +24,33 @@ download_button.addEventListener('click',downloadExpenses);
 
 document.addEventListener('DOMContentLoaded', DomLoad);
 
+const page=1;
 
 //DOMLOAD
 async function DomLoad() {
     try{
-        const token=localStorage.getItem('token');
-        const res = await axios.get("http://localhost:3000/get-expenses",{headers:{"Authorization":token}});
         
-        // console.log(res.data.expenses);
+            await getExpenses(page);
+        
+            await showDownloadedFiles();
+
+        }
+        catch(err){
+        console.log(err)
+        }
+
+}
+
+//get expenses
+async function getExpenses(pageNo){
+    try{
+
+        // console.log(pageNo);
+        const token=localStorage.getItem('token');
+        const res = await axios.get(`http://localhost:3000/get-expenses?page=${pageNo}`,{headers:{"Authorization":token}});
+        
+        const expenses=res.data.expense_Data.expense;
+        console.log(res.data.expense_Data.expense);
 
         localStorage.setItem('ispremiumuser',res.data.ispremiumuser);
 
@@ -44,24 +64,28 @@ async function DomLoad() {
             rzp_button.hidden=true;
         }
 
-        if(res.data.expenses.length > 0){
+        if(expenses.length > 0){
             Eul.hidden=false;
-            for (let i in res.data.expenses) {
-                showOnScreen(res.data.expenses[i]);
-           }
+            Eul.innerHTML='';
+            for (let i in expenses) {
+                showOnScreen(expenses[i]);
+            }
+            showPagination(res.data.expense_Data);
         }
         else{
+            Eul.innerHTML='';
             ElistDiv.innerHTML=ElistDiv.innerHTML+`<h5 id='noexpenses'>No Expenses</h5>`
+            // showPagination(res.data.expense_Data);
         } 
-        
-        showDownloadedFiles();
 
-        }
-        catch(err){
-        console.log(err)
-        }
+    }
+    catch(err){
 
+    }
 }
+
+
+
 
 
 //ADD EXPENSE
@@ -288,9 +312,82 @@ async function showDownloadedFiles(){
     else{
         DownloadListDiv.innerHTML=DownloadListDiv.innerHTML+`<h5 id='nodownload'>Not a Premium User</h5>`
     }
+
+}
+
+
+function showPagination(pageData){
+
+    console.log(pageData);
+
+    // Eul.innerHTML='';
+
+    PaginaitonList.innerHTML='';
+    
+    PaginaitonList.hidden=false;
+
+
+    // console.log(pageData.hasnextPage);
+
+
+
+
+    if(pageData.hasPreviousPage){
+
+        // console.log(pageData.nextPage);
+
+        const li=document.createElement('li');
+
+        li.className="page-item";
+
+        const nextBtn=document.createElement('button');
+        nextBtn.className="btn";
+        nextBtn.appendChild(document.createTextNode(`${pageData.previouePage}`));
+        nextBtn.addEventListener('click',()=>getExpenses(pageData.currentPage-1)); 
+
+       li.appendChild(nextBtn);
+
+       PaginaitonList.appendChild(li);
+
+    }
+
+
+
+
+
+    const li=document.createElement('li');
+    li.className="page-item";
+
+    const nextBtn=document.createElement('button');
+    nextBtn.className="btn";
+    nextBtn.appendChild(document.createTextNode(`${pageData.currentPage}`));
+    nextBtn.addEventListener('click',()=>getExpenses(pageData.currentPage+1)); 
+
+    li.appendChild(nextBtn);
+
+    PaginaitonList.appendChild(li);
     
 
-        
-       
+
+
+       if(pageData.hasnextPage){
+
+        // console.log(pageData.nextPage);
+
+        const li=document.createElement('li');
+
+        li.className="page-item mr-2";
+
+        const nextBtn=document.createElement('button');
+        nextBtn.className="btn";
+        nextBtn.appendChild(document.createTextNode(`${pageData.nextPage}`));
+        nextBtn.addEventListener('click',()=>getExpenses(pageData.currentPage+1)); 
+
+       li.appendChild(nextBtn);
+
+       PaginaitonList.appendChild(li);
+
+    }
+
 
 }
