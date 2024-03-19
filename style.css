@@ -1,157 +1,106 @@
-header{
-    display: flex;
-    justify-content: center;
-    background-color:rgb(185, 159, 125);
-    color:  rgb(95, 71, 37);
+body {
+    padding-top: 5%;
+    background-image: url('../bg_expenses8.webp');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.navbar-brand{
+    font-family: cursive;
+}
+
+.nav-item{
+    color: white;
     font-weight: bold;
 }
+
 h3{
     align-self: center;
-    color:  rgb(95, 71, 37);
+    color:  rgb(19,35,46);
     font-weight: bold;
 }
+
 #msg, #error{
     color: red;
 }
 
 
-#All_Lists{
-    display: flex;
-}
-
-/* header .btn{
-    border-color:  rgb(95, 71, 37);
-    border-radius: 15px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    margin-left: auto;
-    color:  rgb(95, 71, 37);
+h6{
+    color:  rgb(5, 124, 202);
     font-weight: bold;
-} */
-#premiumfeatures{
-   float: right;
-}
-
-
-#premiumfeatures h6{
-    margin: 10px;
-    color:  rgb(95, 71, 37);
-    font-weight: bold;
-    align-self: center;
-    /* margin-top: 10px; */
 }
 
 .card{
-    margin-top: 10px;
-    margin-left: 350px;
-    justify-content: center;
-    background-color: antiquewhite;
-
-
+    background-color: rgb(219,227,230);
 }
 
 .list-group .btn{
     float: right;
 }
 
-li{
-    border-bottom: 1px dotted rgb(95, 71, 37);
-    margin-top: 10px;
-    list-style-type:  decimal;
-    color:  rgb(95, 71, 37);
+
+.list-group-item{
+    color:  rgb(19,35,46);
     font-weight: bold;
+    background-color: rgb(160, 207, 224);
+    border-color: rgb(160, 207, 224);
+    margin-bottom: 5px;
 }
 
 form label{
     font-weight: bold;
-    margin-right: 10px;
-    color:  rgb(95, 71, 37);
-    font-weight: bold;
+    color:  rgb(19,35,46);
 }
 
 .btn{
-    background-color: rgb(189, 160, 123);
-    border-color: rgb(189, 160, 123);
-    color:  rgb(95, 71, 37);
+    background-color: rgb(160, 207, 224);
+    border-color: rgb(160, 207, 224);
+    color:  rgb(19,35,46);
     font-weight: bold;
 }
 
 .btn-primary:hover{
-    background-color: rgb(107, 80, 45);
-    border-color: rgb(107, 80, 45);;
+    background-color:rgb(19,35,46);
+    border-color: rgb(19,35,46);
 }
 
 #error{
     color: red;
 }
 
+
 /* Extra small devices (phones, 600px and down) */
 @media screen and (max-width: 600px) {
-     
-    .page-header{
-        width: 100%;
-    }
 
-    h1{
-        font-size: large;
-        font-weight: bold;
-        padding-top: 10px;
-    }
-    
     .card{
-        margin-left: 25%;
-        width: max-content;
+        width: auto;
     }
 
-    #premiumfeatures{
-        float: none;
-    }
-
-    #premiumfeatures .btn,h6{
-      font-size: smaller;
+    #premiumfeatures .btn{
+      font-size: smaller; 
     }
 
     .list-group .btn{
         float: inline-end;
     }
-
-    #LeaderBoardList{
-        width: auto;
-    }
-
-    #All_Lists{
-        display: inline;
-    }
-
+    
     h3{
         font-size: medium;
     }
 }
 
 
-/* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {
-
-    .card{
-        margin-left: 40%;
-    }
-}
-
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px){
-    .card{
-        margin-left: 25%;
-    }
-    #Elist{
-        margin-left: 0px;
+
+    #premiumfeatures .btn{
+        font-size: smaller; 
     }
 }
 
 @media only screen and (orientation: landscape) {
-    .card{
-        margin-left: 25%;
+    #premiumfeatures .btn{
+        font-size: smaller; 
     }
-    /* #Elist{
-        margin-left: 0px;
-    } */
 }

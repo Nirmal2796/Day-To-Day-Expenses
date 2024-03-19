@@ -19,12 +19,14 @@ async function forgotPassword(e){
     else{
         try{
 
-            const User={
+            const Email={
                 email:email.value,
                 
             };
     
-            const result= await axios.post("http://localhost:3000/password/forgotpassword",User);
+            const result= await axios.post("http://localhost:3000/password/forgotpassword",Email);
+
+            // console.log(result);
 
 
             form.reset();
