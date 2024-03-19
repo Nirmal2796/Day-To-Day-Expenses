@@ -1,14 +1,15 @@
 const Expense=require('../model/expense');
-const User = require('../model/user');
-const Sequelize = require('sequelize').Sequelize;
+// const AWS=require('aws-sdk');
+// const jwt=require('jsonwebtoken');
+
+const UserServices=require('../services/userservices');
+const S3Services=require('../services/S3services');
+const JwtServices=require('../services/jwtservices');
+
 const sequelize = require('../util/database');
+const FileURL=require('../model/fileurl');
 
-const jwt=require('jsonwebtoken');
 
-function generateAccessToken(id){ //we will call this funciton when user has successfully logged in.
-    //jst.sign({what you want to encrypt} ,  secret key); never share your secret key and dont even save it to git
-    return jwt.sign({userId: id}, 'secretkey');
-}
 
 
 exports.postExpense=async (req,res,next)=>{
@@ -45,6 +46,7 @@ try{
 
         (await transaction).rollback();       
         console.log(err);
+        res.status(500).json({success:false,err:err});
     };
 
 }
@@ -55,12 +57,13 @@ exports.getExpenses=async (req,res,next)=>{
 
        const expenses= await req.user.getExpenses()
       
-        res.status(200).json({expenses ,ispremiumuser: req.user.ispremiumuser ,token:generateAccessToken(req.user.id)});
+        res.status(200).json({expenses ,ispremiumuser: req.user.ispremiumuser ,token:JwtServices.generateAccessToken(req.user.id)});
        
       
    } 
    catch(err){
-    console.log(err);
+        console.log(err);
+        res.status(500).json({success:false,err:err});
     };
 
 }
@@ -84,6 +87,55 @@ try{
     }
         catch(err){
             console.log(err);
+            res.status(500).json({success:false,err:err});
     };
+
+}
+
+
+
+exports.downloadExpense=async (req,res,next)=>{
+    
+    try{
+
+        // const expenses= await req.user.getExpenses();
+        const expenses= await UserServices.getExpenses(req)
+    
+        console.log(expenses);
+    
+        //convert array to string as we can write string to the file
+        const strigifiedExpenses =JSON.stringify(expenses);
+    
+        const userId=req.user.id;
+        //it should depend on userID
+        const filename= `Expenses${userId}/${new Date()}.txt`;
+        
+        const fileURL= await S3Services.uploadToS3(strigifiedExpenses, filename);
+        console.log(fileURL)
+
+        await req.user.createFileurl({
+            url:fileURL
+        })
+    
+        res.status(200).json({fileURL, success:true});
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).json({fileURL:'',success:false,err:err})
+    }
+}
+
+
+exports.getFileUrl=async (req,res,next)=>{
+
+    try{
+
+        const fileUrls=await req.user.getFileurls();
+        res.status(200).json({fileUrls, success:true});
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).json({fileURL:'',success:false,err:err})
+    }
 
 }

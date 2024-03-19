@@ -20,21 +20,22 @@ exports.purchasePremium=(req,res,next)=>{
         const amount = 25000;
     
         //create order with razorpay object and pass amount , currency.
-        rzp.orders.create({amount,currency:'INR'},(err,order)=>{//callback function which get order detials on successful creation of order.
+        rzp.orders.create({amount,currency:'INR'},async(err,order)=>{//callback function which get order detials on successful creation of order.
             if(err){
                 throw new Error(JSON.stringify(err));
             }
             
             //we are trying to save the order details in our order table 
-            req.user.createOrder({orderId:order.id , status:'pending'})
-            .then(()=>{
+            await req.user.createOrder({orderId:order.id , status:'pending'})
+            // .then(()=>{
                 res.status(201).json({order, key_id:rzp.key_id});
-            })
+            // })
             
         })
     }
     catch(err){
         console.log(err);
+        res.status(500).json({success:false,err:err});
     };
 
 
@@ -66,6 +67,7 @@ exports.updatetransactionstatus=async (req,res,next)=>{
     }
     catch(err){
         console.log(err);
+        res.status(500).json({success:false,err:err});
     };
 
 };

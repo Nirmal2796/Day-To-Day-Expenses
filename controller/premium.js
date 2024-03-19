@@ -1,8 +1,5 @@
 const Sequelize = require('sequelize').Sequelize;
 const User=require('../model/user');
-const Expense=require('../model/expense');
-const sequelize = require('../util/database');
-
 
 
 
@@ -11,20 +8,11 @@ exports.showLeaderBoard=async(req,res,next)=>{
         
         const leaderBoard= await User.findAll({
                 attributes:['id','uname','total_expense'],//select
-                group:['user.id'],
-                order:[[sequelize.col('total_expense'),'DESC']]
+                order:[['total_expense','DESC']]
             });
 
 
-        // const result = await User.findAll({
-        //     attributes:['id','uname',[sequelize.fn('sum',sequelize.col('amount')),'amount']],//select 
-        //     include:[{
-        //         model:Expense,
-        //         attributes:[] //must mention
-        //     }],
-        //     group:['user.id'],
-        //     order:[[sequelize.col('amount'),'DESC']]
-        // })
+        
         
         //right join
         // Expense.findAll({attributes:[[sequelize.fn('sum',sequelize.col('amount')),'amount']],
@@ -39,5 +27,6 @@ exports.showLeaderBoard=async(req,res,next)=>{
 
     catch(err){
         console.log(err);
+        res.status(500).json({success:false,err:err});
     };
 }

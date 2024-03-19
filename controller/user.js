@@ -2,7 +2,7 @@ const User=require('../model/user');
 
 const bcrypt=require('bcrypt');
 
-const jwt=require('jsonwebtoken');
+const JwtServices=require('../services/jwtservices');
 
 exports.postSignUpUser=async (req,res,next)=>{
     try{
@@ -32,19 +32,11 @@ exports.postSignUpUser=async (req,res,next)=>{
     catch(err){
         // res.status(500).json({message:err, success:false});
         console.log(err);
+        res.status(500).json({success:false,err:err});
     };
 }
 
 
-
-//GENERATE TOKEN
-function generateAccessToken(id){ 
-
-    //we will call this funciton when user has successfully logged in.
-    //jst.sign({what you want to encrypt} ,  secret key); never share your secret key and dont even save it to git
-   
-    return jwt.sign({userId: id}, 'secretkey');
-}
 
 
 
@@ -63,7 +55,7 @@ exports.postLoginUser=async (req,res,next)=>{
                     res.status(500).json({success:false,message:'Something Went Wrong'});
                 }
                 if(result){
-                    res.status(200).json({success:true, message:'User logged in Successfully' , token:generateAccessToken(user.id)});
+                    res.status(200).json({success:true, message:'User logged in Successfully' , token:JwtServices.generateAccessToken(user.id)});
                 }
                 else{
                     res.status(401).json('User not authorized');
@@ -76,8 +68,8 @@ exports.postLoginUser=async (req,res,next)=>{
 
     }
     catch(err){
-        // res.status(500).json({message:err, success:false});
         console.log(err);
+        res.status(500).json({success:false,err:err});
     };
 
 }
