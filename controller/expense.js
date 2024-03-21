@@ -61,9 +61,9 @@ exports.getExpenses=async (req,res,next)=>{
    try{
 
         const page=req.query.page;
-        const expenses_per_page=1;
+        const expenses_per_page=Number(req.query.limit);
 
-        console.log(page);
+        console.log(expenses_per_page);
 
         const total=await Expense.count({where:{userId:req.user.id}});
 
@@ -74,7 +74,7 @@ exports.getExpenses=async (req,res,next)=>{
             limit:expenses_per_page
         });
 
-        // console.log(expenses);
+        // console.log(expenses_per_page * Number(page) < total);
 
        const expense_Data={
         expense:expenses,
@@ -82,7 +82,8 @@ exports.getExpenses=async (req,res,next)=>{
         hasnextPage: expenses_per_page * Number(page) < total,
         nextPage:Number(page)+1,
         hasPreviousPage: Number(page)>1,
-        previouePage: Number(page) -1
+        previouePage: Number(page) -1,
+        total:total
        }
       
         res.status(200).json({expense_Data ,ispremiumuser: req.user.ispremiumuser ,token:JwtServices.generateAccessToken(req.user.id)});
