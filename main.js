@@ -3,7 +3,7 @@ const desc = document.getElementById('description');
 const category = document.getElementById('category');
 
 const rowsperpage=document.getElementById('rowsperpage');
-rowsperpage.defaultValue=1;
+// rowsperpage.defaultValue=1;
 
 const rzp_button=document.getElementById('rzp-button');
 const leaderboard_button= document.getElementById('leaderboard-button');
@@ -34,6 +34,12 @@ document.addEventListener('DOMContentLoaded', DomLoad);
 
 const page=1;
 
+
+rowsperpage.onchange=async()=>{
+    await getExpenses(1,rowsperpage.value);
+    // currentButton.click();
+}
+
 //DOMLOAD
 async function DomLoad() {
     try{
@@ -54,6 +60,9 @@ async function getExpenses(pageNo,rowsperpage){
     try{
 
         console.log(rowsperpage);
+
+        
+
         const token=localStorage.getItem('token');
         const res = await axios.get(`http://localhost:3000/get-expenses?page=${pageNo}&limit=${rowsperpage}`,{headers:{"Authorization":token}});
 
@@ -334,6 +343,8 @@ function showPagination(pageData){
     
     PaginaitonList.hidden=false;
 
+    console.log(rowsperpage.value);
+    
 
     // console.log(pageData.hasnextPage);
 
