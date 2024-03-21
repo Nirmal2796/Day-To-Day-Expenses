@@ -6,6 +6,21 @@ body {
     background-attachment: fixed;
 }
 
+.page-item .btn{
+    background-color: rgb(19,35,46);
+    border-radius: 100px;
+}
+
+.page-item .btn:hover{
+    background-color:rgb(160, 207, 224);
+   text-decoration: underline;
+}
+
+.page-item .btn:visited{
+    background-color:rgb(31, 130, 167);
+    text-decoration: underline;
+}
+
 .navbar-brand{
     font-family: cursive;
 }

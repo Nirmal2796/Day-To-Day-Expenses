@@ -1,6 +1,10 @@
 const amount = document.getElementById('amount');
 const desc = document.getElementById('description');
 const category = document.getElementById('category');
+
+const rowsperpage=document.getElementById('rowsperpage');
+rowsperpage.defaultValue=1;
+
 const rzp_button=document.getElementById('rzp-button');
 const leaderboard_button= document.getElementById('leaderboard-button');
 const download_button= document.getElementById('download-button');
@@ -30,7 +34,7 @@ const page=1;
 async function DomLoad() {
     try{
         
-            await getExpenses(page);
+            await getExpenses(page,rowsperpage.value);
         
             await showDownloadedFiles();
 
@@ -42,12 +46,12 @@ async function DomLoad() {
 }
 
 //get expenses
-async function getExpenses(pageNo){
+async function getExpenses(pageNo,rowsperpage){
     try{
 
-        // console.log(pageNo);
+        console.log(rowsperpage);
         const token=localStorage.getItem('token');
-        const res = await axios.get(`http://localhost:3000/get-expenses?page=${pageNo}`,{headers:{"Authorization":token}});
+        const res = await axios.get(`http://localhost:3000/get-expenses?page=${pageNo}&limit=${rowsperpage}`,{headers:{"Authorization":token}});
         
         const expenses=res.data.expense_Data.expense;
         console.log(res.data.expense_Data.expense);
@@ -329,47 +333,38 @@ function showPagination(pageData){
 
     // console.log(pageData.hasnextPage);
 
+        if(pageData.hasPreviousPage){
 
+            // console.log(pageData.nextPage);
 
+            const li=document.createElement('li');
 
-    if(pageData.hasPreviousPage){
+            li.className="page-item";
 
-        // console.log(pageData.nextPage);
+            const prevBtn=document.createElement('button');
+            prevBtn.className="btn";
+            prevBtn.innerHTML=pageData.previouePage;
+            prevBtn.addEventListener('click',()=>getExpenses(pageData.previouePage,rowsperpage.value)); 
+
+            li.appendChild(prevBtn);
+
+            PaginaitonList.appendChild(li);
+
+        }
+
 
         const li=document.createElement('li');
-
         li.className="page-item";
 
-        const nextBtn=document.createElement('button');
-        nextBtn.className="btn";
-        nextBtn.appendChild(document.createTextNode(`${pageData.previouePage}`));
-        nextBtn.addEventListener('click',()=>getExpenses(pageData.currentPage-1)); 
+        const CurrentBtn=document.createElement('button');
+        CurrentBtn.className="btn";
+        CurrentBtn.innerHTML=pageData.currentPage;
+        CurrentBtn.addEventListener('click',()=>getExpenses(pageData.currentPage,rowsperpage.value)); 
 
-       li.appendChild(nextBtn);
+        li.appendChild(CurrentBtn);
 
-       PaginaitonList.appendChild(li);
-
-    }
-
-
-
-
-
-    const li=document.createElement('li');
-    li.className="page-item";
-
-    const nextBtn=document.createElement('button');
-    nextBtn.className="btn";
-    nextBtn.appendChild(document.createTextNode(`${pageData.currentPage}`));
-    nextBtn.addEventListener('click',()=>getExpenses(pageData.currentPage+1)); 
-
-    li.appendChild(nextBtn);
-
-    PaginaitonList.appendChild(li);
-    
-
-
-
+        PaginaitonList.appendChild(li);
+        
        if(pageData.hasnextPage){
 
         // console.log(pageData.nextPage);
@@ -380,8 +375,8 @@ function showPagination(pageData){
 
         const nextBtn=document.createElement('button');
         nextBtn.className="btn";
-        nextBtn.appendChild(document.createTextNode(`${pageData.nextPage}`));
-        nextBtn.addEventListener('click',()=>getExpenses(pageData.currentPage+1)); 
+        nextBtn.innerHTML=pageData.nextPage;
+        nextBtn.addEventListener('click',()=>getExpenses(pageData.nextPage,rowsperpage.value)); 
 
        li.appendChild(nextBtn);
 
