@@ -11,14 +11,17 @@ body {
     border-radius: 100px;
 }
 
+
 .page-item .btn:hover{
     background-color:rgb(160, 207, 224);
    text-decoration: underline;
 }
 
-.page-item .btn:visited{
-    background-color:rgb(31, 130, 167);
-    text-decoration: underline;
+.page-item .current{
+    background-color:rgb(160,207,224);
+    color: rgb(19,35,46);
+    border-color: rgb(160,207,224);
+    text-decoration: underline solid  rgb(19,35,46) 3px;
 }
 
 .navbar-brand{

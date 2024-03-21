@@ -8,6 +8,8 @@ rowsperpage.defaultValue=1;
 const rzp_button=document.getElementById('rzp-button');
 const leaderboard_button= document.getElementById('leaderboard-button');
 const download_button= document.getElementById('download-button');
+const currentButton=document.getElementById('current');
+
 
 const form = document.querySelector('form');
 const Eul = document.getElementById('expense-list');
@@ -21,10 +23,12 @@ const PaginaitonList=document.getElementById('pagination');
 const DownloadH5=document.getElementById('nodownload');
 const ExpensesH5=document.getElementById('noexpenses');
 
+
 form.addEventListener('submit', onSubmit);
 rzp_button.addEventListener('click',razorpayEvent);
 leaderboard_button.addEventListener('click',showLeaderBoard);
 download_button.addEventListener('click',downloadExpenses);
+
 
 document.addEventListener('DOMContentLoaded', DomLoad);
 
@@ -52,7 +56,7 @@ async function getExpenses(pageNo,rowsperpage){
         console.log(rowsperpage);
         const token=localStorage.getItem('token');
         const res = await axios.get(`http://localhost:3000/get-expenses?page=${pageNo}&limit=${rowsperpage}`,{headers:{"Authorization":token}});
-        
+
         const expenses=res.data.expense_Data.expense;
         console.log(res.data.expense_Data.expense);
 
@@ -351,13 +355,14 @@ function showPagination(pageData){
             PaginaitonList.appendChild(li);
 
         }
-
+        
 
         const li=document.createElement('li');
         li.className="page-item";
 
         const CurrentBtn=document.createElement('button');
-        CurrentBtn.className="btn";
+        CurrentBtn.className="btn current";
+        CurrentBtn.setAttribute("id","current");
         CurrentBtn.innerHTML=pageData.currentPage;
         CurrentBtn.addEventListener('click',()=>getExpenses(pageData.currentPage,rowsperpage.value)); 
 
