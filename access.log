@@ -1,0 +1,6 @@
+::1 - - [23/Mar/2024:19:04:20 +0000] "OPTIONS /login HTTP/1.1" 204 0 "http://127.0.0.1:5501/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
+::1 - - [23/Mar/2024:19:04:21 +0000] "POST /login HTTP/1.1" 200 187 "http://127.0.0.1:5501/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
+::ffff:127.0.0.1 - - [23/Mar/2024:19:04:28 +0000] "OPTIONS /get-expenses?page=1&limit=1 HTTP/1.1" 204 0 "http://127.0.0.1:5501/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
+::ffff:127.0.0.1 - - [23/Mar/2024:19:04:29 +0000] "GET /get-expenses?page=1&limit=1 HTTP/1.1" 200 431 "http://127.0.0.1:5501/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
+::ffff:127.0.0.1 - - [23/Mar/2024:19:04:29 +0000] "OPTIONS /downloaded-files HTTP/1.1" 204 0 "http://127.0.0.1:5501/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
+::ffff:127.0.0.1 - - [23/Mar/2024:19:04:29 +0000] "GET /downloaded-files HTTP/1.1" 304 - "http://127.0.0.1:5501/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
