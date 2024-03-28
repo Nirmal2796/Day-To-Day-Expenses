@@ -126,10 +126,14 @@
                     <ul id="expense-list" class="list-group list-group-numbered" hidden>
             
                     </ul>
+
+                    <h5 id='noexpenses' hidden>No Expenses</h5>
+
+
                     <div class="container-sm">
                         <div class="row">
         
-                            <form id="noofrows">  
+                            <form id="noofrows" hidden>  
                                 <div class="row mb-3 justify-content-center">
                                     <label for="rowsperpage" class="col-sm-4 col-form-label">Rows per page:</label>
                                     <div class="col-sm-5">
@@ -147,15 +151,13 @@
                         </div>
                     </div>
 
-
+                    
                     
                     <nav>
-                        <ul class="pagination justify-content-center" id="pagination" >
+                        <ul class="pagination justify-content-center" id="pagination" hidden>
         
                                 <li class="page-item"><button class="btn">Prev</button></li>
-                                <li class="page-item"><button class="btn">Next</button></li>
-                            
-                            
+                                <li class="page-item"><button class="btn">Next</button></li>                           
                         </ul>
                     </nav>
                 </div>
